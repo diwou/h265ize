@@ -1,0 +1,45 @@
+# Abhängigkeiten und Paketmanager
+node_modules/
+jspm_packages/
+.npm/
+.yarn-integrity
+
+# Lokale Konfiguration
+settings.json
+
+# Build-, Laufzeit- und Ausgabe-Artefakte
+h265/
+h265ize.csv
+test/
+coverage/
+.nyc_output/
+lib-cov/
+build/Release/
+logs/
+log.txt
+*.log
+*.pid
+*.pid.lock
+*.seed
+
+# Temporäre und Editor-Dateien
+.eslintcache
+.node_repl_history
+.cache/
+*.tmp
+*.bak
+*~
+
+# Paket-Artefakte
+*.tgz
+
+# VSCodium / VS Code
+.vscode/c_cpp_properties.json
+.vscode/launch.json
+.vscode/settings.json
+.vscode/.browse.c_cpp.db*
+.vscode/ipch/
+
+# Sonstige alte Tool-Artefakte
+.grunt
+.lock-wscript
