@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.6.2]
+
+### Fixed
+- Fixed global npm installation by shipping `patch-package` as a runtime dependency instead of a dev-only dependency.
+- Pinned `fluent-ffmpeg` to the patched `2.1.2` release so fresh installs receive the exact version covered by the maintained compatibility patch.
+
 ## [0.6.1]
 
 ### Changed
