@@ -10,7 +10,10 @@ h265ize is a fire and forget weapon. A nodejs utility utilizing ffmpeg to encode
 
 ## Fork Status
 
-This fork is currently being prepared for active maintenance.
+This fork is now maintained at Codeberg:
+
+- Repository: `https://codeberg.org/diwou/h265ize`
+- Issues: `https://codeberg.org/diwou/h265ize/issues`
 
 Planned focus areas:
 
@@ -19,7 +22,7 @@ Planned focus areas:
 - keep the CLI behavior as compatible as reasonably possible
 - improve diagnostics and regression safety for future fixes
 
-Until the new public repository is published, this checkout should be treated as the active working copy.
+This checkout is the active maintenance branch for the fork.
 
 ## Origin
 
@@ -62,8 +65,19 @@ Until the new public repository is published, this checkout should be treated as
 
 ## Installation
 
-At the moment, local development is the primary workflow for this fork.
-Published package or repository URLs will be added once the new public home for the fork exists.
+Current installation focus for this fork is local development and testing.
+The maintained source repository is available at `https://codeberg.org/diwou/h265ize`.
+
+Typical local setup:
+
+```bash
+git clone https://codeberg.org/diwou/h265ize.git
+cd h265ize
+npm install
+node ./h265ize --help
+```
+
+Planned package publishing is expected to use a scoped npm package name, for example `@diwou/h265ize`, so the original unscoped `h265ize` package name is not assumed to be available.
 
 ## Usage
 
@@ -148,7 +162,7 @@ npm install
 node ./h265ize --help
 ```
 
-When the repository URL is available, issue tracker and release information will be linked here as well.
+Issue tracking for this fork lives at `https://codeberg.org/diwou/h265ize/issues`.
 
 ### Aspresets
 

@@ -22,11 +22,11 @@ Ziel ist es, die bestehende CLI wieder zuverlässig mit aktuellen `ffmpeg`-Versi
 
 ## Veröffentlichungsstrategie
 
-- Das Projekt wird als gepflegter Fork weiterentwickelt und später in ein eigenes öffentliches Repository überführt.
-- Für npm ist ein scoped Paket vorgesehen, zum Beispiel `@deinname/h265ize`.
+- Das Projekt wird als gepflegter Fork im Repository `https://codeberg.org/diwou/h265ize` weiterentwickelt.
+- Für npm ist ein scoped Paket vorgesehen, zum Beispiel `@diwou/h265ize`.
 - Der ursprüngliche unscoped Paketname `h265ize` wird nicht als verfügbar angenommen.
 - Der CLI-Befehl soll nach Möglichkeit weiterhin `h265ize` bleiben, auch wenn der Paketname scoped veröffentlicht wird.
-- Repository-, Homepage- und Issue-Links in `package.json` bleiben bis zur tatsächlichen Veröffentlichung neutral oder Platzhalter und werden erst mit dem finalen Ziel-Repository gesetzt.
+- Repository-, Homepage- und Issue-Links in `package.json` sollen auf das Codeberg-Repository zeigen.
 
 ## Verifikation
 

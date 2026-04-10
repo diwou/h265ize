@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ### Changed
 - Reworked the README around the maintenance-fork status and local development workflow.
 - Prepared project metadata for an independent maintained fork without outdated upstream repository links.
+- Pointed package and documentation metadata at the active Codeberg repository for this fork.
 - Normalized `.gitignore` for Node.js, VSCodium, and local project artifacts.
 - Added a `patch-package`-based `postinstall` step to `package.json` so local dependency fixes are reapplied automatically.
 - Standardized package management in the fork on `npm`.

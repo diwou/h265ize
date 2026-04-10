@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git+https://codeberg.org/diwou/h265ize.git"
   },
   "keywords": [
     "video",
@@ -27,9 +27,9 @@
   "author": "Ayrton Sparling (original project), maintained fork by local repository owner",
   "license": "MIT",
   "bugs": {
-    "url": ""
+    "url": "https://codeberg.org/diwou/h265ize/issues"
   },
-  "homepage": "",
+  "homepage": "https://codeberg.org/diwou/h265ize",
   "dependencies": {
     "bluebird": "^3.4.6",
     "chokidar": "^1.6.1",
