@@ -79,6 +79,14 @@ node ./h265ize --help
 
 Planned package publishing is expected to use a scoped npm package name, for example `@diwou/h265ize`, so the original unscoped `h265ize` package name is not assumed to be available.
 
+Planned global install command for the maintained fork:
+
+```bash
+npm install -g @diwou/h265ize
+```
+
+The installed CLI command is still intended to remain `h265ize`.
+
 ## Usage
 
 `./h265ize [--help] [-d <string>] [-q <0-51>] [-m <string>] [-n <string>] [-f <string>{3}] [-g <string>] [-l <integer>] [-o] [-p] [-v] [--bitdepth (8|10|12)] [--accurate-timestamps] [--as-preset <preset>] [--disable-upconvert] [--debug] [--video-bitrate <integer>] [--he-audio] [--force-he-audio] [--downmix-he-audio] [--screenshots] [--delete] <file|directory>`
@@ -161,6 +169,12 @@ Typical local workflow:
 npm install
 node ./h265ize --help
 ```
+
+Current release target for the maintained fork:
+
+- first maintained fork release: `0.6.0`
+- planned npm package name: `@diwou/h265ize`
+- CLI command: `h265ize`
 
 Issue tracking for this fork lives at `https://codeberg.org/diwou/h265ize/issues`.
 

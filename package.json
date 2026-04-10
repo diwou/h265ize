@@ -1,6 +1,6 @@
 {
-  "name": "h265ize",
-  "version": "0.5.0",
+  "name": "@diwou/h265ize",
+  "version": "0.6.0",
   "mode": "development",
   "packageManager": "npm@11.7.0",
   "description": "Maintained h265ize fork for batch video conversion to H.265/HEVC with current ffmpeg versions.",
@@ -30,6 +30,9 @@
     "url": "https://codeberg.org/diwou/h265ize/issues"
   },
   "homepage": "https://codeberg.org/diwou/h265ize",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "bluebird": "^3.4.6",
     "chokidar": "^1.6.1",

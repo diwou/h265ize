@@ -24,6 +24,7 @@ Ziel ist es, die bestehende CLI wieder zuverlässig mit aktuellen `ffmpeg`-Versi
 
 - Das Projekt wird als gepflegter Fork im Repository `https://codeberg.org/diwou/h265ize` weiterentwickelt.
 - Für npm ist ein scoped Paket vorgesehen, zum Beispiel `@diwou/h265ize`.
+- Die erste gepflegte Fork-Version ist als `0.6.0` vorgesehen.
 - Der ursprüngliche unscoped Paketname `h265ize` wird nicht als verfügbar angenommen.
 - Der CLI-Befehl soll nach Möglichkeit weiterhin `h265ize` bleiben, auch wenn der Paketname scoped veröffentlicht wird.
 - Repository-, Homepage- und Issue-Links in `package.json` sollen auf das Codeberg-Repository zeigen.

@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.6.0]
+
 ### Added
 - Maintenance fork baseline with `AGENTS.md`, `.editorconfig`, and cleaned up project scaffolding.
 - Reproducible vendor patch under `patches/` for `fluent-ffmpeg` so local installs keep working with current `ffmpeg` output.
@@ -17,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Prepared project metadata for an independent maintained fork without outdated upstream repository links.
 - Pointed package and documentation metadata at the active Codeberg repository for this fork.
 - Added a direct README reference to the original upstream GitHub repository for historical context.
+- Prepared the first maintained fork release as `0.6.0` and aligned package metadata with the planned scoped npm package name `@diwou/h265ize`.
 - Normalized `.gitignore` for Node.js, VSCodium, and local project artifacts.
 - Added a `patch-package`-based `postinstall` step to `package.json` so local dependency fixes are reapplied automatically.
 - Standardized package management in the fork on `npm`.
