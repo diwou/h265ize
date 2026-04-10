@@ -62,6 +62,10 @@ function getGitText(args) {
     }).trim();
 }
 
+function hasGitCheckout() {
+    return fs.existsSync(Path.join(__dirname, '.git'));
+}
+
 function getDevelopmentVersion() {
     let branch = 'unknown';
     let short = 'unknown';
@@ -71,6 +75,10 @@ function getDevelopmentVersion() {
         branch = packageSettings._requested.hosted.directUrl.substring(url.lastIndexOf('/', url.length - 14), url.length - 13).substr(1, url.length);
         short = packageSettings.gitHead.substr(0, 7);
         return branch + '#' + short;
+    }
+
+    if (!hasGitCheckout()) {
+        return packageSettings.version;
     }
 
     branch = getGitText(['branch', '--show-current']) || getGitText(['rev-parse', '--abbrev-ref', 'HEAD']);
@@ -113,8 +121,6 @@ function runCli() {
                 console.log(packageSettings.name, packageSettings.version);
                 process.exit(0);
             } else if (packageSettings.mode === 'development') {
-                let branch = 'unknown';
-                let short = "unknown";
                 try {
                     console.log(packageSettings.name, getDevelopmentVersion());
                     process.exit(0);

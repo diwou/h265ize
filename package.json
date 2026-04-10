@@ -1,6 +1,6 @@
 {
   "name": "@diwou/h265ize",
-  "version": "0.6.2",
+    "version": "0.6.3",
   "mode": "development",
   "packageManager": "npm@11.7.0",
   "description": "Maintained Node.js CLI for batch video transcoding to H.265/HEVC with modern ffmpeg compatibility.",

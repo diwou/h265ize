@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.6.3]
+
+### Fixed
+- Fixed `h265ize --version` for npm-installed builds by falling back to the package version when no Git checkout is available.
+- Restored fast crop detection on long inputs by switching sampled scans back to input seeking and keeping fallback scans bounded to a short local window instead of effectively decoding the full file.
+
 ## [0.6.2]
 
 ### Fixed
