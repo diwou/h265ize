@@ -26,7 +26,7 @@ This checkout is the active maintenance branch for the fork.
 
 ## Origin
 
-- Original project: `FallingSnow/h265ize`
+- Original project: [`FallingSnow/h265ize`](https://github.com/FallingSnow/h265ize)
 - Original author: Ayrton Sparling
 - Original license: MIT
 - Fork intent: continue maintenance and repair compatibility with modern toolchains
