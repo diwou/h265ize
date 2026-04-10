@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Repaired the `loudnorm` normalization path for current `ffmpeg` by parsing JSON summaries robustly and re-encoding filtered audio streams instead of trying to combine filters with stream copy.
 - Hardened interlace detection by parsing current `idet` output more defensively, so deinterlacing no longer fails on newer `ffmpeg` stderr layouts.
 - Corrected `idet` stream mapping so multi-video inputs analyze the selected video stream instead of failing with broad `-map v` behavior.
+- Made the fast crop-detection path more reliable on current `ffmpeg` by switching sampled seeks to a short output-side analysis window and using the last detected crop result instead of immediately falling back on sparse seeks.
 - Made temporary-file cleanup more robust by ignoring already-missing files instead of raising follow-up `ENOENT` errors after failed runs.
 - Fixed helper handling for missing stream `tags`, so title and language normalization no longer throw on incomplete ffprobe metadata.
 - Removed the outdated version lookup via `local-git-sync` and replaced it with direct `git` calls, eliminating the large ShellJS warning flood on current Node versions during normal startup.
