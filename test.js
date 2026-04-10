@@ -70,6 +70,52 @@ describe('Helpers', function() {
     });
 });
 
+describe('Analysis path regressions', function() {
+    it('parses multiple loudnorm JSON summaries from ffmpeg stderr', function() {
+        let stderr = [
+            '[Parsed_loudnorm_0 @ 0x1]',
+            '{',
+            '  "input_i" : "-33.09",',
+            '  "input_tp" : "-21.89",',
+            '  "input_lra" : "2.40",',
+            '  "input_thresh" : "-43.09",',
+            '  "target_offset" : "-0.05"',
+            '}',
+            '[Parsed_loudnorm_1 @ 0x2]',
+            '{',
+            '  "input_i" : "-33.74",',
+            '  "input_tp" : "-17.66",',
+            '  "input_lra" : "7.30",',
+            '  "input_thresh" : "-43.74",',
+            '  "target_offset" : "-0.26"',
+            '}'
+        ].join('\n');
+
+        let summaries = h265ize.Video.parseLoudnormSummaries(stderr);
+        assert.lengthOf(summaries, 2);
+        assert.strictEqual(summaries[0].input_i, '-33.09');
+        assert.strictEqual(summaries[1].target_offset, '-0.26');
+    });
+
+    it('uses the last detected crop result from ffmpeg stderr', function() {
+        let stderr = [
+            '[Parsed_cropdetect_0 @ 0x1] crop=3720:1604:68:2',
+            '[Parsed_cropdetect_0 @ 0x1] crop=3714:1602:72:6'
+        ].join('\n');
+
+        assert.deepEqual(h265ize.Video.extractCropFromStderr(stderr), {
+            w: 3714,
+            h: 1602,
+            x: 72,
+            y: 6
+        });
+    });
+
+    it('returns null when no crop result is present in stderr', function() {
+        assert.strictEqual(h265ize.Video.extractCropFromStderr('frame=10 fps=20'), null);
+    });
+});
+
 describe('Video stream mapping regressions', function() {
     it('uses output-relative audio metadata and disposition indices', function() {
         let command = createCommandRecorder();

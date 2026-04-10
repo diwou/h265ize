@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Maintenance fork baseline with `AGENTS.md`, `.editorconfig`, and cleaned up project scaffolding.
 - Reproducible vendor patch under `patches/` for `fluent-ffmpeg` so local installs keep working with current `ffmpeg` output.
 - Focused regression tests for helper metadata handling and output-relative stream mapping.
+- Focused regression tests for `loudnorm` summary parsing and crop-detection stderr parsing.
 
 ### Changed
 - Reworked the README around the maintenance-fork status and local development workflow.
