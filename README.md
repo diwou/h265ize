@@ -65,8 +65,21 @@ This checkout is the active maintenance branch for the fork.
 
 ## Installation
 
-Current installation focus for this fork is local development and testing.
 The maintained source repository is available at `https://codeberg.org/diwou/h265ize`.
+
+Global installation from npm:
+
+```bash
+npm install -g @diwou/h265ize
+```
+
+The installed CLI command remains:
+
+```bash
+h265ize
+```
+
+Local development and testing:
 
 Typical local setup:
 
@@ -77,15 +90,7 @@ npm install
 node ./h265ize --help
 ```
 
-Planned package publishing is expected to use a scoped npm package name, for example `@diwou/h265ize`, so the original unscoped `h265ize` package name is not assumed to be available.
-
-Planned global install command for the maintained fork:
-
-```bash
-npm install -g @diwou/h265ize
-```
-
-The installed CLI command is still intended to remain `h265ize`.
+The original unscoped `h265ize` package name is not assumed to be available.
 
 ## Usage
 

@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.6.1]
+
+### Changed
+- Updated npm package metadata to use the clearer maintained-fork description and a more relevant keyword set.
+- Documented the real npm installation path in the README for the published package `@diwou/h265ize`.
+- Cleaned up `package.json` test and `bin` entries so future npm publishes do not need automatic metadata correction.
+
 ## [0.6.0]
 
 ### Added

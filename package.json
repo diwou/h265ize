@@ -1,15 +1,17 @@
 {
   "name": "@diwou/h265ize",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "mode": "development",
   "packageManager": "npm@11.7.0",
-  "description": "Maintained h265ize fork for batch video conversion to H.265/HEVC with current ffmpeg versions.",
+  "description": "Maintained Node.js CLI for batch video transcoding to H.265/HEVC with modern ffmpeg compatibility.",
   "main": "h265ize",
   "scripts": {
     "postinstall": "patch-package",
-    "test": "./node_modules/.bin/mocha --reporter spec test.js"
+    "test": "mocha --reporter spec test.js"
   },
-  "bin": "h265ize",
+  "bin": {
+    "h265ize": "./h265ize"
+  },
   "directories": {
     "lib": "lib"
   },
@@ -18,11 +20,15 @@
     "url": "git+https://codeberg.org/diwou/h265ize.git"
   },
   "keywords": [
+    "hevc",
+    "h265",
+    "ffmpeg",
+    "transcoding",
     "video",
-    "convert",
-    "encode",
-    "library",
-    "transcode"
+    "cli",
+    "batch-processing",
+    "media",
+    "nodejs"
   ],
   "author": "Ayrton Sparling (original project), maintained fork by local repository owner",
   "license": "MIT",
