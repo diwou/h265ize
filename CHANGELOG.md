@@ -11,6 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
+- Replaced the remaining Moment.js time formatting and progress timing helpers with native date and duration helpers. [cdfda6b]
 - Removed the `moment-duration-format` dependency from the live progress path by using a local duration formatter instead. [d1052cb]
 - Changed the missing-input CLI path to print a clear error instead of showing help when no file or directory is provided. [fe7c749]
 - Fixed crop detection aggregation so mixed samples no longer cancel out black bars at the top or bottom of the video. [f47c692]
