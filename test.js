@@ -94,7 +94,7 @@ describe('Helpers', function() {
         assert.strictEqual(helpers.normalizeStreamLanguage({}), 'Unknown');
     });
 
-    it('formats durations as hh:mm:ss without relying on moment-duration-format', function() {
+    it('formats durations as hh:mm:ss with the native helper', function() {
         assert.strictEqual(helpers.formatDurationHms(0), '00:00:00');
         assert.strictEqual(helpers.formatDurationHms(61.4), '00:01:01');
         assert.strictEqual(helpers.formatDurationHms(3661), '01:01:01');
