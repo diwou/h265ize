@@ -202,8 +202,8 @@ function runCli() {
         if (args.watch) {
             watchDirectory(args.watch);
         } else if (!input) {
-            args.showHelp();
-            process.exit(0);
+            logger.error('No input file or directory specified. Use --help for usage.');
+            process.exit(1);
         } else {
             processInput(input);
         }
