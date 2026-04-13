@@ -11,6 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
+- Removed the unused `optional`, `long-stack-traces`, and `stack-trace` helper dependencies from the runtime install set. [d1c4f8f]
 - Improved audio metadata fallbacks by recognizing uppercase Matroska title/language tags and estimating missing audio bitrates from the surrounding container when possible. [882a674]
 - Replaced the remaining Moment.js time formatting and progress timing helpers with native date and duration helpers. [cdfda6b]
 - Removed the `moment-duration-format` dependency from the live progress path by using a local duration formatter instead. [d1052cb]
