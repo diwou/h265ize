@@ -9,7 +9,6 @@ const childProcess = require('child_process');
 
 const _ = require("lodash");
 const colors = require('colors');
-const moment = require('moment');
 const fs = require('fs-extra');
 const keypress = require('keypress');
 const Promise = require("bluebird");
@@ -270,7 +269,7 @@ function runCli() {
                 });
 
                 // Tell the user when the encoder has started
-                logger.verbose('Encoding started at', colors.yellow(moment().format("dddd, MMMM Do YYYY, h:mm:ss A")));
+                logger.verbose('Encoding started at', colors.yellow(helpers.formatLongTimestamp(new Date())));
 
                 // Start the encoder
                 encoder.start();
@@ -278,7 +277,7 @@ function runCli() {
                 // Output some information when the Encoder finishes encoding its queue
                 encoder.events.on('finished', function() {
 
-                    logger.verbose('Folder encoding finished at', colors.yellow(moment().format("dddd, MMMM Do YYYY, h:mm:ss A")), {
+                    logger.verbose('Folder encoding finished at', colors.yellow(helpers.formatLongTimestamp(new Date())), {
                         __divider: true
                     });
 
