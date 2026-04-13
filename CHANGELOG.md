@@ -26,6 +26,7 @@ Release policy for this fork:
 - Added a stale-progress fallback that switches to frame-based progress when `timemark` stays unchanged while frames keep increasing. [0b5a315]
 
 ### Added
+- Added bundled Matroska regression fixtures under `fixtures/matroska/` so probe and container tests can run against real validation samples. [902577e]
 - Added a real crop preview smoke test that writes preview screenshots to a temp directory and verifies the generated files. [7d91128]
 - Added a `--crop-preview` mode that saves crop preview screenshots and prints a short report before encoding starts. [108237c]
 - Added a post-encode summary that reports bitrate, resolution, video codec, and track overview after successful completion. [e96064d]
