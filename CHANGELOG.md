@@ -11,7 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
-- Removed the unused `optional`, `long-stack-traces`, and `stack-trace` helper dependencies from the runtime install set. [d1c4f8f]
+- Removed the unused `optional`, `long-stack-traces`, and `stack-trace` helper dependencies from the runtime install set. [7b5248a]
 - Improved audio metadata fallbacks by recognizing uppercase Matroska title/language tags and estimating missing audio bitrates from the surrounding container when possible. [882a674]
 - Replaced the remaining Moment.js time formatting and progress timing helpers with native date and duration helpers. [cdfda6b]
 - Removed the `moment-duration-format` dependency from the live progress path by using a local duration formatter instead. [d1052cb]
@@ -46,6 +46,7 @@ Release policy for this fork:
 - Added an opt-in `--ignore-err` switch to tolerate lightly corrupted input files with `ffmpeg -err_detect ignore_err`. [9bd358b]
 
 ### Changed
+- Simplified the CLI startup flow by removing the promise wrapper and keeping the watcher local. [86f83ec]
 - Kept `AGENTS.md` as a local-only maintenance note by ignoring it in git and removing it from version control. [882a674]
 - Simplified the live ffmpeg progress line so the frame block is shown as `current/estimated frames` without a duplicated label. [2b793ca]
 - Documented the fork-only feature set in the README so fork additions are easier to discover. [64cc005]
