@@ -212,6 +212,20 @@ Current release target for the maintained fork:
 
 Issue tracking for this fork lives at `https://codeberg.org/diwou/h265ize/issues`.
 
+### Regression Fixtures
+
+The repository includes a small bundled Matroska validation set under
+[`fixtures/matroska/`](fixtures/matroska/). These files are copied from the
+upstream Matroska test file project and are used for automated regression and
+smoke testing.
+
+They are useful for checking:
+
+- basic Matroska parsing
+- multi-audio and multi-subtitle handling
+- missing duration metadata
+- commentary and language-tag edge cases
+
 ### Aspresets
 
    Preset    | Description

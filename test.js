@@ -69,6 +69,32 @@ function createPreviewSource(videoPath) {
     });
 }
 
+const matroskaFixtureDir = Path.join(__dirname, 'fixtures', 'matroska');
+
+function probeMatroskaFixture(fileName) {
+    let output = childProcess.execFileSync('ffprobe', [
+        '-v', 'error',
+        '-show_streams',
+        '-show_format',
+        '-print_format', 'json',
+        Path.join(matroskaFixtureDir, fileName)
+    ], {
+        encoding: 'utf8'
+    });
+
+    return JSON.parse(output);
+}
+
+function getFormatTitle(metadata) {
+    return metadata.format && metadata.format.tags && (metadata.format.tags.TITLE || metadata.format.tags.title);
+}
+
+function countStreams(metadata, codecType) {
+    return metadata.streams.filter(function(stream) {
+        return stream.codec_type === codecType;
+    }).length;
+}
+
 describe('Helpers', function() {
     it('returns a stream title from tags when present', function() {
         assert.strictEqual(helpers.getStreamTitle({
@@ -563,6 +589,82 @@ describe('Analysis path regressions', function() {
         let percent = h265ize.Video.getProgressPercent(progress, processed, 6602.688, 24, previousProgress);
         assert.strictEqual(percent.source, 'frames');
         assert.isAbove(percent.value, 81.4);
+    });
+});
+
+describe('Matroska fixtures', function() {
+    it('ships the complete bundled Matroska validation set with tag sidecars', function() {
+        for (let index = 1; index <= 8; index += 1) {
+            let baseName = 'test' + index;
+            assert.isTrue(fs.existsSync(Path.join(matroskaFixtureDir, baseName + '.mkv')), baseName + '.mkv is missing');
+            assert.isTrue(fs.existsSync(Path.join(matroskaFixtureDir, baseName + '-tag.xml')), baseName + '-tag.xml is missing');
+        }
+    });
+
+    it('probes every bundled Matroska fixture without failing', function() {
+        for (let index = 1; index <= 8; index += 1) {
+            let metadata = probeMatroskaFixture('test' + index + '.mkv');
+
+            assert.isAtLeast(metadata.streams.length, 1, 'test' + index + '.mkv should expose at least one stream');
+            assert.isAtLeast(countStreams(metadata, 'video'), 1, 'test' + index + '.mkv should include a video stream');
+        }
+    });
+
+    it('probes the basic Big Buck Bunny fixture', function() {
+        let metadata = probeMatroskaFixture('test1.mkv');
+
+        assert.strictEqual(metadata.streams.length, 2);
+        assert.strictEqual(countStreams(metadata, 'video'), 1);
+        assert.strictEqual(countStreams(metadata, 'audio'), 1);
+        assert.strictEqual(metadata.streams[0].codec_name, 'msmpeg4v2');
+        assert.strictEqual(metadata.streams[1].codec_name, 'mp3');
+        assert.strictEqual(getFormatTitle(metadata), 'Big Buck Bunny - test 1');
+        assert.strictEqual(metadata.format.duration, '87.336000');
+    });
+
+    it('probes the Elephant Dream audio bitrate fixture', function() {
+        let metadata = probeMatroskaFixture('test3.mkv');
+
+        assert.strictEqual(metadata.streams.length, 2);
+        assert.strictEqual(countStreams(metadata, 'video'), 1);
+        assert.strictEqual(countStreams(metadata, 'audio'), 1);
+        assert.strictEqual(metadata.streams[1].codec_name, 'mp3');
+        assert.strictEqual(metadata.streams[1].bit_rate, '172001');
+        assert.strictEqual(getFormatTitle(metadata), 'Elephant Dream - test 3');
+        assert.strictEqual(metadata.format.duration, '49.064000');
+    });
+
+    it('probes the Matroska file with missing duration metadata', function() {
+        let metadata = probeMatroskaFixture('test4.mkv');
+
+        assert.strictEqual(metadata.streams.length, 2);
+        assert.strictEqual(countStreams(metadata, 'video'), 1);
+        assert.strictEqual(countStreams(metadata, 'audio'), 1);
+        assert.strictEqual(metadata.streams[0].codec_name, 'theora');
+        assert.strictEqual(metadata.streams[1].codec_name, 'vorbis');
+        assert.notProperty(metadata.format, 'duration');
+    });
+
+    it('probes the multi-track fixture with subtitles and commentary audio', function() {
+        let metadata = probeMatroskaFixture('test5.mkv');
+        let audioStreams = metadata.streams.filter(function(stream) {
+            return stream.codec_type === 'audio';
+        });
+        let subtitleStreams = metadata.streams.filter(function(stream) {
+            return stream.codec_type === 'subtitle';
+        });
+
+        assert.strictEqual(metadata.streams.length, 11);
+        assert.strictEqual(audioStreams.length, 2);
+        assert.strictEqual(subtitleStreams.length, 8);
+        assert.strictEqual(metadata.streams[0].codec_name, 'h264');
+        assert.strictEqual(getFormatTitle(metadata), 'Big Buck Bunny - test 8');
+        assert.isTrue(audioStreams.some(function(stream) {
+            return stream.tags && stream.tags.title === 'Commentary';
+        }));
+        assert.isTrue(subtitleStreams.some(function(stream) {
+            return stream.tags && stream.tags.language === 'jpn';
+        }));
     });
 });
 
