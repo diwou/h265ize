@@ -120,6 +120,20 @@ describe('Helpers', function() {
         assert.strictEqual(helpers.normalizeStreamLanguage({}), 'Unknown');
     });
 
+    it('falls back to uppercase title and language tags', function() {
+        assert.strictEqual(helpers.getStreamTitle({
+            tags: {
+                TITLE: 'English Stereo'
+            }
+        }), 'English Stereo');
+
+        assert.strictEqual(helpers.normalizeStreamLanguage({
+            tags: {
+                LANGUAGE: 'eng'
+            }
+        }), 'English');
+    });
+
     it('formats durations as hh:mm:ss with the native helper', function() {
         assert.strictEqual(helpers.formatDurationHms(0), '00:00:00');
         assert.strictEqual(helpers.formatDurationHms(61.4), '00:01:01');
@@ -507,6 +521,34 @@ describe('Analysis path regressions', function() {
             'Estimated Video Bitrate: 3 739 kb/s @ AVC',
             'Audio #1: German E-AC-3 640 kb/s (6 channels)',
             'Audio #2: Polish E-AC-3 640 kb/s (6 channels)'
+        ]);
+    });
+
+    it('estimates missing audio bitrates from the remaining container bitrate', function() {
+        let summary = h265ize.Video.buildEncodeSummary({
+            format: {
+                size: '125000000',
+                duration: '100',
+                bit_rate: '1000000'
+            },
+            streams: [{
+                codec_type: 'video',
+                codec_name: 'h264',
+                width: 1920,
+                height: 1080,
+                bit_rate: '700000'
+            }, {
+                codec_type: 'audio',
+                codec_name: 'aac',
+                channels: 2
+            }]
+        });
+
+        assert.deepEqual(summary, [
+            'Avg. Bitrate: 1 000 kb/s',
+            'Resolution: 1920 x 1080',
+            'Video Bitrate: 700 kb/s (container estimate 1 000 kb/s) @ AVC',
+            'Audio #1: Unknown AAC ~300 kb/s (2 channels)'
         ]);
     });
 
