@@ -11,6 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
+- Removed the `moment-duration-format` dependency from the live progress path by using a local duration formatter instead. [d1052cb]
 - Changed the missing-input CLI path to print a clear error instead of showing help when no file or directory is provided. [fe7c749]
 - Fixed crop detection aggregation so mixed samples no longer cancel out black bars at the top or bottom of the video. [f47c692]
 - Fixed compatibility with current `mathjs` versions by using `math.evaluate()` instead of the removed `math.eval()`. [f47c692]
