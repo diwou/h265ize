@@ -84,79 +84,78 @@ function getDevelopmentVersion() {
     return branch + '#' + short;
 }
 
+function getLoggerForArgs(args) {
+    if (args.debug)
+        return h265izeLogger('debug');
+
+    if (args.verbose)
+        return h265izeLogger('verbose');
+
+    return h265izeLogger('info');
+}
+
+function printHelp(args) {
+    console.log(colors.underline('Package:'), colors.yellow(packageSettings.name), '\t', colors.underline('Version:'), colors.yellow(packageSettings.version));
+    console.log(colors.underline('Description:'), packageSettings.description);
+    args.showHelp();
+    process.exit(0);
+}
+
+function printVersion() {
+    if (packageSettings.mode === 'production') {
+        console.log(packageSettings.name, packageSettings.version);
+        process.exit(0);
+    }
+
+    if (packageSettings.mode === 'development') {
+        try {
+            console.log(packageSettings.name, getDevelopmentVersion());
+            process.exit(0);
+        } catch (e) {
+            console.log('Unabled to retrieve version:', e);
+            process.exit(1);
+        }
+    }
+}
+
 /* ------------------------ Command Line Interface -------------------------- */
 
 function runCli() {
-    let logger;
+    let args = helpers.getCLIArguments();
+    let logger = getLoggerForArgs(args);
+    let encoder = new Encoder(logger);
+    let watcher = null;
 
-    new Promise(function(resolve, reject) {
-        let args = helpers.getCLIArguments();
+    logger.debug('Command Line: ' + process.argv.join(' '));
 
-        // Initialize a new logger. This can be replaced by the console logger,
-        // for example:
-        // const consoleLogger = require('./lib/consoleLogger.js');
-        // let logger = require('./lib/consoleLogger.js');
-        if (args.debug)
-            logger = h265izeLogger('debug');
-        else if (args.verbose)
-            logger = h265izeLogger('verbose');
-        else
-            logger = h265izeLogger('info');
+    if (args.help)
+        return printHelp(args);
 
-        logger.debug('Command Line: ' + process.argv.join(' '));
+    if (args.version)
+        return printVersion();
 
-        // Show help
-        if (args.help) {
-            console.log(colors.underline('Package:'), colors.yellow(packageSettings.name), '\t', colors.underline('Version:'), colors.yellow(packageSettings.version));
-            console.log(colors.underline('Description:'), packageSettings.description);
-            args.showHelp();
-            process.exit(0);
+    function shutdown() {
+        encoder.stop();
+        if (watcher)
+            watcher.close();
+
+        if (process.H265IZE_STOP_REQUEST_COUNT > 1) {
+            logger.error('Shutdown signal more than once. Shutting down immediately...')
+            return process.exit(1);
         }
 
-        // Show version
-        if (args.version) {
-            if (packageSettings.mode === 'production') {
-                console.log(packageSettings.name, packageSettings.version);
-                process.exit(0);
-            } else if (packageSettings.mode === 'development') {
-                try {
-                    console.log(packageSettings.name, getDevelopmentVersion());
-                    process.exit(0);
-                } catch (e) {
-                    console.log('Unabled to retrieve version:', e);
-                    process.exit(1);
-                }
-            }
-        } else {
-            resolve(args);
-        }
-    }).then(function(args) {
-
-        // Initiate a new Encoder
-        let encoder = new Encoder(logger);
-
-        function shutdown() {
-            encoder.stop();
-            if (typeof watcher !== 'undefined')
-                watcher.close();
-
-            if (process.H265IZE_STOP_REQUEST_COUNT > 1) {
-                logger.error('Shutdown signal more than once. Shutting down immediately...')
-                return process.exit(1);
-            }
-
-            if (logger.transports.file) {
-                // File logger needs time to flush to disk
-                logger.info('Flushing log to disk...');
-                setTimeout(function() {
-                    logger.info('Process ended.');
-                    process.exit(0);
-                }, 2000);
-            } else {
+        if (logger.transports.file) {
+            // File logger needs time to flush to disk
+            logger.info('Flushing log to disk...');
+            setTimeout(function() {
                 logger.info('Process ended.');
                 process.exit(0);
-            }
+            }, 2000);
+        } else {
+            logger.info('Process ended.');
+            process.exit(0);
         }
+    }
 
         // Make sure this is a terminal where we can listen for input events
         // If it is, then listen for specific keypress events
@@ -251,7 +250,7 @@ function runCli() {
             encoder.root = path;
 
             // Detect if the input exists and whether it is a file or directory
-            helpers.parseInput(input, logger)
+            helpers.parseInput(path, logger)
 
             .then(function(paths) {
 
@@ -290,8 +289,6 @@ function runCli() {
                 });
             });
         }
-    });
-
 }
 
 if (!module.parent) {

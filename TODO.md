@@ -12,9 +12,7 @@ Read first:
 
 ## Should Do
 
-- Review smaller legacy helper dependencies and remove the ones that are no longer pulling their weight.
-- Consider simplifying the command-line wrapper and startup flow where it reduces maintenance cost without changing behavior.
-- Keep the repository and lockfile metadata tidy so future maintenance remains predictable.
+- No current open items.
 
 ## Could Do
 
