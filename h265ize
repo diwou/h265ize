@@ -10,7 +10,6 @@ const childProcess = require('child_process');
 const _ = require("lodash");
 const colors = require('colors');
 const moment = require('moment');
-require("moment-duration-format");
 const fs = require('fs-extra');
 const keypress = require('keypress');
 const Promise = require("bluebird");
