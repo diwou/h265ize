@@ -1,4 +1,7 @@
 const assert = require('chai').assert;
+const childProcess = require('child_process');
+const fs = require('fs-extra');
+const Path = require('path');
 const h265ize = require('./h265ize');
 const ASPresets = require('./lib/aspresets.json');
 
@@ -47,6 +50,23 @@ function assertHasCall(calls, expected) {
     assert.isTrue(calls.some(function(call) {
         return JSON.stringify(call) === JSON.stringify(expected);
     }), 'Expected call was not recorded: ' + JSON.stringify(expected));
+}
+
+function makeTempDir(prefix) {
+    return fs.mkdtempSync(Path.join('/tmp', prefix));
+}
+
+function createPreviewSource(videoPath) {
+    childProcess.execFileSync('ffmpeg', [
+        '-y',
+        '-f', 'lavfi',
+        '-i', 'testsrc2=size=320x240:rate=10',
+        '-t', '12',
+        '-pix_fmt', 'yuv420p',
+        videoPath
+    ], {
+        stdio: ['ignore', 'ignore', 'ignore']
+    });
 }
 
 describe('Helpers', function() {
@@ -284,6 +304,25 @@ describe('Analysis path regressions', function() {
             'Preview files: movie-01.png, movie-02.png',
             'Preview crop: 1918x802:1:139'
         ]);
+    });
+
+    it('writes crop preview screenshots to a temp directory', function() {
+        let tempDir = makeTempDir('h265ize-crop-preview-');
+        let inputVideo = Path.join(tempDir, 'input.mkv');
+        let previewDir = Path.join(tempDir, 'preview');
+
+        createPreviewSource(inputVideo);
+
+        return h265ize.Video.takeScreenshots(inputVideo, previewDir, nullLogger, 'crop=320:240:0:0').then(function(result) {
+            assert.strictEqual(result.outputDir, previewDir);
+            assert.lengthOf(result.filenames, 6);
+
+            result.filenames.forEach(function(filename) {
+                assert.isTrue(fs.existsSync(Path.join(previewDir, filename)));
+            });
+        }).finally(function() {
+            fs.removeSync(tempDir);
+        });
     });
 
     it('maps crop presets to the expected cropdetect settings', function() {
