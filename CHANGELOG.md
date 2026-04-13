@@ -23,7 +23,7 @@ Release policy for this fork:
 - Added a stale-progress fallback that switches to frame-based progress when `timemark` stays unchanged while frames keep increasing. [0b5a315]
 
 ### Added
-- Added a `--crop-preview` mode that saves crop preview screenshots and prints a short report before encoding starts. [unreleased]
+- Added a `--crop-preview` mode that saves crop preview screenshots and prints a short report before encoding starts. [108237c]
 - Added a post-encode summary that reports bitrate, resolution, video codec, and track overview after successful completion. [e96064d]
 - Added crop detection presets for `normal`, `analog`, and `strict` material via `--crop`. [a78d0c7]
 - Added an `old` crop detection switch for older recordings that reuses the analog preset. [bc9b8d1]
