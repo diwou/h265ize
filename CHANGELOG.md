@@ -46,6 +46,7 @@ Release policy for this fork:
 - Added an opt-in `--ignore-err` switch to tolerate lightly corrupted input files with `ffmpeg -err_detect ignore_err`. [9bd358b]
 
 ### Changed
+- Trimmed a set of stale commented-out code blocks and dead helper paths while keeping the current runtime behavior intact. [41de0f9]
 - Labeled the live ffmpeg progress timemark and ETA fields more explicitly so the progress line is easier to scan. [f4b45f3]
 - Simplified the CLI startup flow by removing the promise wrapper and keeping the watcher local. [86f83ec]
 - Kept `AGENTS.md` as a local-only maintenance note by ignoring it in git and removing it from version control. [882a674]
