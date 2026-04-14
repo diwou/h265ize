@@ -1,6 +1,6 @@
 const assert = require('chai').assert;
 const childProcess = require('child_process');
-const fs = require('fs-extra');
+const fs = require('fs');
 const Path = require('path');
 const h265ize = require('./h265ize');
 const ASPresets = require('./lib/aspresets.json');
@@ -54,6 +54,13 @@ function assertHasCall(calls, expected) {
 
 function makeTempDir(prefix) {
     return fs.mkdtempSync(Path.join('/tmp', prefix));
+}
+
+function removeTempDir(path) {
+    fs.rmSync(path, {
+        recursive: true,
+        force: true
+    });
 }
 
 function createPreviewSource(videoPath) {
@@ -139,6 +146,24 @@ describe('Helpers', function() {
         assert.strictEqual(helpers.formatDurationHms(61.4), '00:01:01');
         assert.strictEqual(helpers.formatDurationHms(3661), '01:01:01');
         assert.strictEqual(helpers.formatDurationHms(360000), '100:00:00');
+    });
+
+    it('recursively finds supported videos in nested directories', function() {
+        let tempDir = makeTempDir('h265ize-parse-input-');
+        let nestedDir = Path.join(tempDir, 'nested');
+        let copiedFile = Path.join(nestedDir, 'fixture.mkv');
+
+        fs.mkdirSync(nestedDir, {
+            recursive: true
+        });
+        fs.copyFileSync(Path.join(matroskaFixtureDir, 'test1.mkv'), copiedFile);
+        fs.writeFileSync(Path.join(nestedDir, 'notes.txt'), 'ignore me');
+
+        return helpers.parseInput(tempDir, nullLogger).then(function(paths) {
+            assert.deepEqual(paths, [copiedFile]);
+        }).finally(function() {
+            removeTempDir(tempDir);
+        });
     });
 
     it('validates settings objects against the supported config schema', function() {
@@ -376,7 +401,7 @@ describe('Analysis path regressions', function() {
                 assert.isTrue(fs.existsSync(Path.join(previewDir, filename)));
             });
         }).finally(function() {
-            fs.removeSync(tempDir);
+            removeTempDir(tempDir);
         });
     });
 

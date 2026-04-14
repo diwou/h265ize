@@ -7,9 +7,9 @@ const os = require("os");
 const readline = require("readline");
 const childProcess = require('child_process');
 
-const _ = require("lodash");
+const _ = require("./lib/lodashLite.js");
 const colors = require('colors');
-const fs = require('fs-extra');
+const fs = require('fs');
 const keypress = require('keypress');
 const Promise = require("bluebird");
 const Pauser = require('promise-pauser');
