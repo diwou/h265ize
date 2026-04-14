@@ -16,7 +16,6 @@ Read first:
 
 ## Could Do
 
-- Polish the live progress output only if there is a clear readability win.
 - Revisit larger utility dependencies like `fs-extra`, `recursive-readdir`, `lodash`, and `mathjs` only when there is a concrete refactor reason.
 - Continue trimming old comments and dead code paths as they surface during normal work.
 
