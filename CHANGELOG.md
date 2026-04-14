@@ -11,7 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
-- Switched bitrate grouping to comma separators so summary values read as `5,019 kb/s` instead of space-separated groups. [pending]
+- Switched bitrate grouping to comma separators so summary values read as `5,019 kb/s` instead of space-separated groups. [1492efc]
 
 ## [0.6.4] - 2026-04-14
 
