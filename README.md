@@ -8,6 +8,17 @@ Our goal is to rebuild `h265ize` on a maintainable basis while preserving the fa
 
 h265ize is a fire and forget weapon. A nodejs utility utilizing ffmpeg to encode large quantities of videos with the hevc codec. For more information visit [ayrton.sparling.us](https://ayrton.sparling.us/index.php/ultimate-x265hevc-encoding-script-h265ize/ "Ayrton Sparling").
 
+## Current Release
+
+The current stable fork release is `0.6.4`.
+
+Highlights:
+
+- fixed deprecation warnings and trimmed obsolete dependencies
+- added `--probe`, `--explain`, `--dry-run`, `--ignore-err`, and `--crop-preview`
+- improved crop handling, progress reporting, and metadata fallbacks
+- added bundled Matroska regression fixtures for repeatable testing
+
 ## Fork Status
 
 This fork is now maintained at Codeberg:
