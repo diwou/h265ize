@@ -11,6 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
+- Replaced the remaining `fs-extra`, `recursive-readdir`, and `lodash` runtime dependencies with local Node-based helpers. [03e618d]
 - Removed the unused `optional`, `long-stack-traces`, and `stack-trace` helper dependencies from the runtime install set. [7b5248a]
 - Improved audio metadata fallbacks by recognizing uppercase Matroska title/language tags and estimating missing audio bitrates from the surrounding container when possible. [882a674]
 - Removed the `mathjs` runtime dependency by replacing frame-rate parsing with a local helper. [2444b5d]
