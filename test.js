@@ -185,6 +185,14 @@ describe('AS presets', function() {
 });
 
 describe('Analysis path regressions', function() {
+    it('parses ffprobe frame rates without mathjs', function() {
+        assert.strictEqual(h265ize.Video.parseFrameRate('24/1'), 24);
+        assert.closeTo(h265ize.Video.parseFrameRate('24000/1001'), 23.976023976, 1e-9);
+        assert.strictEqual(h265ize.Video.parseFrameRate('30'), 30);
+        assert.isNaN(h265ize.Video.parseFrameRate('N/A'));
+        assert.isNaN(h265ize.Video.parseFrameRate(''));
+    });
+
     it('parses multiple loudnorm JSON summaries from ffmpeg stderr', function() {
         let stderr = [
             '[Parsed_loudnorm_0 @ 0x1]',

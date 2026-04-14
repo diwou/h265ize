@@ -16,7 +16,8 @@ Read first:
 
 ## Could Do
 
-- Reviewed larger utility dependencies like `fs-extra`, `recursive-readdir`, `lodash`, and `mathjs`; no safe removal without a concrete refactor reason.
+- Reviewed larger utility dependencies like `fs-extra`, `recursive-readdir`, and `lodash`; no safe removal without a concrete refactor reason.
+- `mathjs` has already been replaced with a local frame-rate parser and removed from the runtime dependencies.
 
 ## Last Resort
 
