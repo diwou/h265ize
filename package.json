@@ -10,7 +10,7 @@
     "test": "mocha --reporter spec test.js"
   },
   "bin": {
-    "h265ize": "./h265ize"
+    "h265ize": "h265ize"
   },
   "directories": {
     "lib": "lib"
