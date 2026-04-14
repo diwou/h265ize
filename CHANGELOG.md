@@ -11,6 +11,7 @@ Release policy for this fork:
 ## [0.6.4] - 2026-04-14
 
 ### Fixed
+- Changed the CLI version output to print the released package version instead of a branch hash on the release branches. [pending]
 - Replaced deprecated `fs.F_OK` checks with `fs.constants.F_OK` so startup no longer emits Node deprecation warnings. [2cc1af2]
 - Replaced the remaining `fs-extra`, `recursive-readdir`, and `lodash` runtime dependencies with local Node-based helpers. [03e618d]
 - Removed the unused `optional`, `long-stack-traces`, and `stack-trace` helper dependencies from the runtime install set. [7b5248a]
