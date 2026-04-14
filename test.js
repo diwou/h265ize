@@ -478,9 +478,9 @@ describe('Analysis path regressions', function() {
         });
 
         assert.deepEqual(summary, [
-            'Avg. Bitrate: 5 019 kb/s',
+            'Avg. Bitrate: 5,019 kb/s',
             'Resolution: 1280 x 720',
-            'Video Bitrate: 3 733 kb/s (container estimate 3 739 kb/s) @ AVC',
+            'Video Bitrate: 3,733 kb/s (container estimate 3,739 kb/s) @ AVC',
             'Audio #1: German E-AC-3 640 kb/s (6 channels)',
             'Audio #2: Polish E-AC-3 640 kb/s (6 channels)',
             'Subtitle #1: German (forced & full)',
@@ -549,9 +549,9 @@ describe('Analysis path regressions', function() {
         });
 
         assert.deepEqual(summary, [
-            'Avg. Bitrate: 5 019 kb/s',
+            'Avg. Bitrate: 5,019 kb/s',
             'Resolution: 1280 x 720',
-            'Estimated Video Bitrate: 3 739 kb/s @ AVC',
+            'Estimated Video Bitrate: 3,739 kb/s @ AVC',
             'Audio #1: German E-AC-3 640 kb/s (6 channels)',
             'Audio #2: Polish E-AC-3 640 kb/s (6 channels)'
         ]);
@@ -578,9 +578,9 @@ describe('Analysis path regressions', function() {
         });
 
         assert.deepEqual(summary, [
-            'Avg. Bitrate: 1 000 kb/s',
+            'Avg. Bitrate: 1,000 kb/s',
             'Resolution: 1920 x 1080',
-            'Video Bitrate: 700 kb/s (container estimate 1 000 kb/s) @ AVC',
+            'Video Bitrate: 700 kb/s (container estimate 1,000 kb/s) @ AVC',
             'Audio #1: Unknown AAC ~300 kb/s (2 channels)'
         ]);
     });

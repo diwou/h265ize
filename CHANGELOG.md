@@ -8,6 +8,11 @@ Release policy for this fork:
 - Only validated, working public releases receive semantic version numbers.
 - Interim maintenance milestones are tracked by commit ID until they are proven fit for release.
 
+## [Unreleased]
+
+### Fixed
+- Switched bitrate grouping to comma separators so summary values read as `5,019 kb/s` instead of space-separated groups. [pending]
+
 ## [0.6.4] - 2026-04-14
 
 ### Fixed
