@@ -10,6 +10,8 @@ Release policy for this fork:
 
 ## [Unreleased]
 
+## [0.6.4] - 2026-04-14
+
 ### Fixed
 - Replaced deprecated `fs.F_OK` checks with `fs.constants.F_OK` so startup no longer emits Node deprecation warnings. [2cc1af2]
 - Replaced the remaining `fs-extra`, `recursive-readdir`, and `lodash` runtime dependencies with local Node-based helpers. [03e618d]
