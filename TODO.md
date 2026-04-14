@@ -16,8 +16,7 @@ Read first:
 
 ## Could Do
 
-- Revisit larger utility dependencies like `fs-extra`, `recursive-readdir`, `lodash`, and `mathjs` only when there is a concrete refactor reason.
-- Continue trimming old comments and dead code paths as they surface during normal work.
+- Reviewed larger utility dependencies like `fs-extra`, `recursive-readdir`, `lodash`, and `mathjs`; no safe removal without a concrete refactor reason.
 
 ## Last Resort
 

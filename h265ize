@@ -13,8 +13,6 @@ const fs = require('fs-extra');
 const keypress = require('keypress');
 const Promise = require("bluebird");
 const Pauser = require('promise-pauser');
-//const stackTrace = require('stack-trace');
-//require("long-stack-traces");
 const yargs = require('yargs');
 const chokidar = require('chokidar');
 
@@ -27,13 +25,9 @@ const h265izeLogger = require('./lib/logger.js');
 module.name = packageSettings.name;
 
 Promise.config({
-    // Enable warnings
     warnings: true,
-    // Enable long stack traces
     longStackTraces: true,
-    // Enable cancellation
     cancellation: true,
-    // Enable monitoring
     monitoring: false
 });
 
