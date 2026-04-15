@@ -219,14 +219,26 @@ describe('Analysis path regressions', function() {
     });
 
     it('falls back to r_frame_rate when avg_frame_rate is unavailable', function() {
+        let frameRateInfo = h265ize.Video.getFrameRateInfo({
+            avg_frame_rate: 'N/A',
+            r_frame_rate: '25/1'
+        });
+
+        assert.strictEqual(frameRateInfo.value, 25);
+        assert.strictEqual(frameRateInfo.source, 'r_frame_rate');
+
         assert.strictEqual(h265ize.Video.getFrameRate({
             avg_frame_rate: 'N/A',
             r_frame_rate: '25/1'
         }), 25);
-        assert.isNaN(h265ize.Video.getFrameRate({
+
+        frameRateInfo = h265ize.Video.getFrameRateInfo({
             avg_frame_rate: 'N/A',
             r_frame_rate: 'N/A'
-        }));
+        });
+
+        assert.isNaN(frameRateInfo.value);
+        assert.strictEqual(frameRateInfo.source, 'none');
     });
 
     it('falls back to the remaining duration for ETA when fps is unavailable', function() {
