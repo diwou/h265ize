@@ -433,6 +433,19 @@ describe('Analysis path regressions', function() {
         });
     });
 
+    it('probes fixture metadata through the direct ffprobe wrapper', function() {
+        this.timeout(10000);
+        let fixture = Path.join(matroskaFixtureDir, 'test1.mkv');
+
+        return h265ize.Video.getMetadata({
+            path: fixture
+        }).then(function(metadata) {
+            assert.isNumber(metadata.format.duration);
+            assert.isAbove(metadata.format.duration, 0);
+            assert.isAtLeast(metadata.streams.length, 1);
+        });
+    });
+
     it('maps crop presets to the expected cropdetect settings', function() {
         assert.deepEqual(h265ize.Video.getCropProfile('normal'), {
             limit: 0.094,
