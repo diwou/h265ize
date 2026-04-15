@@ -11,6 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
+- Flattened the `--debug` progress width diagnostics so the live logs show the individual column sources instead of a nested `[object Object]` value. [95ec089]
 - Used the same divider-style column source for the live progress output so wide terminals keep the familiar full-width progress line instead of falling back to the compact form. [263ce5a]
 - Aligned the live progress width detection with the divider logic again so the wide-terminal progress line follows the same `process.stdout.columns` source as the separator row. [eb1909d]
 - Removed the unsafe native TTY window-size calls so the live progress width detection can no longer abort the process with a Node assertion failure. [a2ef299]
