@@ -752,6 +752,24 @@ describe('Analysis path regressions', function() {
         assert.isAtMost(veryNarrowBar.length - 2, 6);
     });
 
+    it('finalizes the progress line to 100 percent with a matching frame count', function() {
+        let final = h265ize.Video.buildFinalProgressStatus({
+            frames: 120,
+            percent: 99.9,
+            timemark: '00:01:00',
+            currentFps: 40
+        }, 60, 30, 61, '/tmp/output.mkv', {
+            frames: 120,
+            percent: '99.9',
+            timemark: '00:01:00'
+        });
+
+        assert.strictEqual(final.percent, '100');
+        assert.strictEqual(final.percentValue, 100);
+        assert.strictEqual(final.frameProgress, '1800/1800 frames');
+        assert.strictEqual(final.eta, '00:00:00');
+    });
+
     it('returns n/a for frame progress when the inputs are insufficient', function() {
         assert.strictEqual(h265ize.Video.formatProgressFrames({}, null, null), 'n/a');
     });
