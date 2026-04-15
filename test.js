@@ -742,9 +742,14 @@ describe('Analysis path regressions', function() {
         let narrowLine = h265ize.Video.buildProgressLine(status, 70);
         assert.include(narrowLine, '[ffmpeg]');
         assert.include(narrowLine, '63.4%');
+        assert.include(stripAnsi(narrowLine), '73fps');
         assert.include(stripAnsi(narrowLine), 'ETA 00:39:50');
         assert.notInclude(stripAnsi(narrowLine), 'timemark [00:24:13.53]');
         assert.notInclude(stripAnsi(narrowLine), '~1.56 GB');
+
+        let veryNarrowLine = h265ize.Video.buildProgressLine(status, 48);
+        let veryNarrowBar = (stripAnsi(veryNarrowLine).match(/\[[#\-\?]+\]/) || [''])[0];
+        assert.isAtMost(veryNarrowBar.length - 2, 6);
     });
 
     it('returns n/a for frame progress when the inputs are insufficient', function() {
