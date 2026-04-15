@@ -11,6 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
+- Added an adaptive ASCII progress bar to the live encode output so the status line scales with terminal width. [8cd6630]
 - Removed `fluent-ffmpeg` from the runtime path by switching the remaining command-building logic to a local ffmpeg builder. [5fdfdc8]
 - Normalized the direct ffmpeg progress fields so live encode updates again expose `fps`, `frames`, `timemark`, and size data in the expected legacy shape. [1b329fc]
 - Fixed live ffmpeg progress parsing so carriage-return-delimited updates are emitted during encoding instead of waiting until the end of the process. [ebc4045]
