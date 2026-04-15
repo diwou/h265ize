@@ -11,6 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
+- Removed the inactive `gpu-info` runtime dependency and its unused hardware-detection probe from the encoder startup path. [edf6335]
 - Showed `100%` instead of `100.0%` on the final progress line so the last frame count and completion state read cleanly. [d4f1355]
 - Finalized the live progress line at completion so the last visible frame count is pulled to the exact total and `100%` before the summary starts. [e2e4adc]
 - Reordered the live progress line so narrow terminals keep `fps` visible before lower-priority details and use a shorter bar when space is tight. [d3d7b67]
