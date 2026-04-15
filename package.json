@@ -44,7 +44,6 @@
     "chokidar": "^5.0.0",
     "colors": "^1.1.2",
     "filesize": "^3.3.0",
-    "gpu-info": "0.0.1",
     "hasbin": "^1.2.3",
     "keypress": "^0.2.1",
     "memorystream": "^0.3.1",
