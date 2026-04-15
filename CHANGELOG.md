@@ -11,6 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
+- Aligned the live progress width detection with the divider logic again so the wide-terminal progress line follows the same `process.stdout.columns` source as the separator row. [eb1909d]
 - Removed the unsafe native TTY window-size calls so the live progress width detection can no longer abort the process with a Node assertion failure. [a2ef299]
 - Used the internal TTY window-size handle as a last resort so the live progress output can still pick up the real terminal width when the public Node columns fields are unavailable. [8636ac5]
 - Used the terminal `COLUMNS` environment value as an additional width source so the live progress output keeps the legacy wide-terminal layout in shells that do not expose the TTY width cleanly. [f1c0bab]
