@@ -11,6 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
+- Used the internal TTY window-size handle as a last resort so the live progress output can still pick up the real terminal width when the public Node columns fields are unavailable. [8636ac5]
 - Used the terminal `COLUMNS` environment value as an additional width source so the live progress output keeps the legacy wide-terminal layout in shells that do not expose the TTY width cleanly. [f1c0bab]
 - Matched the wide-terminal progress bar width to the legacy output again so the familiar 22-character bar and full status line fit the 170-column layout. [4cad797]
 - Restored the detailed live progress bar layout on wide terminals so the bar and the full status line appear again in the familiar order before the compact fallback takes over for narrow terminals. [d4d9606]
