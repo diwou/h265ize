@@ -11,6 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
+- Finalized the live progress line at completion so the last visible frame count is pulled to the exact total and `100%` before the summary starts. [e2e4adc]
 - Reordered the live progress line so narrow terminals keep `fps` visible before lower-priority details and use a shorter bar when space is tight. [d3d7b67]
 - Prioritized the live progress fields by terminal width so narrow terminals keep the bar, percent, and ETA while dropping lower-priority details first. [2c7beb7]
 - Added an adaptive ASCII progress bar to the live encode output so the status line scales with terminal width. [8cd6630]
