@@ -11,7 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
-- Removed `fluent-ffmpeg` from the runtime path by switching the remaining command-building logic to a local ffmpeg builder. [e6a2a28]
+- Removed `fluent-ffmpeg` from the runtime path by switching the remaining command-building logic to a local ffmpeg builder. [5fdfdc8]
 - Normalized the direct ffmpeg progress fields so live encode updates again expose `fps`, `frames`, `timemark`, and size data in the expected legacy shape. [1b329fc]
 - Fixed live ffmpeg progress parsing so carriage-return-delimited updates are emitted during encoding instead of waiting until the end of the process. [ebc4045]
 - Spawned the main encode and sample commands directly so the remaining `fluent-ffmpeg` processing path can be migrated step by step. [c8965bf]
