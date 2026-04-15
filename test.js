@@ -218,6 +218,22 @@ describe('Analysis path regressions', function() {
         assert.isNaN(h265ize.Video.parseFrameRate(''));
     });
 
+    it('parses available ffmpeg filters from the direct ffmpeg listing', function() {
+        let filters = h265ize.Video.parseAvailableFilters([
+            ' TS aap               AA->A      Apply Affine Projection algorithm to first audio stream.',
+            ' TS dynaudnorm        A->A       Dynamic Audio Normalizer.',
+            ' .. loudnorm          A->A       EBU R128 loudness normalization',
+            ' T. volume            A->A       Change input volume.',
+            ' .. volumedetect      A->A       Detect audio volume.'
+        ].join('\n'));
+
+        assert.isTrue(filters.dynaudnorm);
+        assert.isTrue(filters.loudnorm);
+        assert.isTrue(filters.volume);
+        assert.isTrue(filters.volumedetect);
+        assert.isTrue(filters.aap);
+    });
+
     it('falls back to r_frame_rate when avg_frame_rate is unavailable', function() {
         let frameRateInfo = h265ize.Video.getFrameRateInfo({
             avg_frame_rate: 'N/A',
