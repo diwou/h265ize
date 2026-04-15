@@ -11,6 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
+- Fixed live ffmpeg progress parsing so carriage-return-delimited updates are emitted during encoding instead of waiting until the end of the process. [ebc4045]
 - Spawned the main encode and sample commands directly so the remaining `fluent-ffmpeg` processing path can be migrated step by step. [c8965bf]
 - Replaced the read-only `ffmpeg` analysis paths for crop detection, deinterlace detection, and audio normalization with direct spawn helpers so the next `fluent-ffmpeg` removal step can be tested independently. [436ed1e]
 - Switched the metadata probe path to a direct `ffprobe` spawn helper so the first phase of the `fluent-ffmpeg` removal can be tested independently. [a7900ef]
