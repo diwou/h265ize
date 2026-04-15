@@ -234,6 +234,22 @@ describe('Analysis path regressions', function() {
         assert.isTrue(filters.aap);
     });
 
+    it('normalizes raw ffmpeg progress fields to the legacy progress shape', function() {
+        let progress = h265ize.Video.normalizeFfmpegProgress({
+            frame: '43606',
+            fps: '73.4',
+            time: '00:24:13.53',
+            size: '1554',
+            bitrate: '1,566.0kbits/s'
+        });
+
+        assert.strictEqual(progress.frames, 43606);
+        assert.strictEqual(progress.currentFps, 73.4);
+        assert.strictEqual(progress.timemark, '00:24:13.53');
+        assert.strictEqual(progress.targetSize, 1554);
+        assert.strictEqual(progress.currentKbps, 1566);
+    });
+
     it('falls back to r_frame_rate when avg_frame_rate is unavailable', function() {
         let frameRateInfo = h265ize.Video.getFrameRateInfo({
             avg_frame_rate: 'N/A',
