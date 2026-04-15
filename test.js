@@ -218,6 +218,22 @@ describe('Analysis path regressions', function() {
         assert.isNaN(h265ize.Video.parseFrameRate(''));
     });
 
+    it('falls back to r_frame_rate when avg_frame_rate is unavailable', function() {
+        assert.strictEqual(h265ize.Video.getFrameRate({
+            avg_frame_rate: 'N/A',
+            r_frame_rate: '25/1'
+        }), 25);
+        assert.isNaN(h265ize.Video.getFrameRate({
+            avg_frame_rate: 'N/A',
+            r_frame_rate: 'N/A'
+        }));
+    });
+
+    it('falls back to the remaining duration for ETA when fps is unavailable', function() {
+        assert.strictEqual(h265ize.Video.estimateEtaSeconds(6780, 19.3, 1315.98, NaN, NaN, 1315.98), 5464.02);
+        assert.closeTo(h265ize.Video.estimateEtaSeconds(6780, 19.3, 1315.98, NaN, NaN, 1315.98), 5464.02, 1e-9);
+    });
+
     it('parses multiple loudnorm JSON summaries from ffmpeg stderr', function() {
         let stderr = [
             '[Parsed_loudnorm_0 @ 0x1]',

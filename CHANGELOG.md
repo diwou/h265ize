@@ -11,6 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
+- Added a frame-rate fallback from `r_frame_rate` and an ETA fallback from the remaining duration when `avg_frame_rate` is missing or unusable. [pending]
 - Switched bitrate grouping to comma separators so summary values read as `5,019 kb/s` instead of space-separated groups. [1492efc]
 
 ## [0.6.4] - 2026-04-14
