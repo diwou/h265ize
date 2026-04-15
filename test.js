@@ -2,6 +2,7 @@ const assert = require('chai').assert;
 const childProcess = require('child_process');
 const fs = require('fs');
 const Path = require('path');
+const stripAnsi = require('strip-ansi');
 const h265ize = require('./h265ize');
 const ASPresets = require('./lib/aspresets.json');
 const FfmpegCommandBuilder = require('./lib/ffmpegCommandBuilder.js');
@@ -717,6 +718,33 @@ describe('Analysis path regressions', function() {
     it('keeps the progress bar width within sensible bounds for terminal width', function() {
         assert.strictEqual(h265ize.Video.getProgressBarWidth('prefix line', 8, 24, 120), 24);
         assert.strictEqual(h265ize.Video.getProgressBarWidth('a very long prefix line that eats space', 8, 24, 50), 8);
+    });
+
+    it('builds a progress line that drops lower priority details on narrow terminals', function() {
+        let status = {
+            percentValue: 63.4,
+            percent: '63.4',
+            fpsText: '73',
+            frameProgress: '43606/218142 frames',
+            elapsedFormated: '00:09:56',
+            speed: '2.433',
+            timemark: '00:24:13.53',
+            eta: '00:39:50',
+            estimatedFileSize: '~1.56 GB'
+        };
+
+        let wideLine = h265ize.Video.buildProgressLine(status, 140);
+        assert.include(wideLine, '73fps');
+        assert.include(wideLine, '43606/218142 frames');
+        assert.include(wideLine, 'timemark [00:24:13.53]');
+        assert.include(wideLine, '~1.56 GB');
+
+        let narrowLine = h265ize.Video.buildProgressLine(status, 70);
+        assert.include(narrowLine, '[ffmpeg]');
+        assert.include(narrowLine, '63.4%');
+        assert.include(stripAnsi(narrowLine), 'ETA 00:39:50');
+        assert.notInclude(stripAnsi(narrowLine), 'timemark [00:24:13.53]');
+        assert.notInclude(stripAnsi(narrowLine), '~1.56 GB');
     });
 
     it('returns n/a for frame progress when the inputs are insufficient', function() {
