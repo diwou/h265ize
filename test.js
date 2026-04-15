@@ -709,6 +709,16 @@ describe('Analysis path regressions', function() {
         }, 6602.688, 24), '132000/158465 frames');
     });
 
+    it('formats a progress bar from the given percentage', function() {
+        assert.strictEqual(h265ize.Video.formatProgressBar(50, 10), '[#####-----]');
+        assert.strictEqual(h265ize.Video.formatProgressBar(NaN, 10), '[??????????]');
+    });
+
+    it('keeps the progress bar width within sensible bounds for terminal width', function() {
+        assert.strictEqual(h265ize.Video.getProgressBarWidth('prefix line', 8, 24, 120), 24);
+        assert.strictEqual(h265ize.Video.getProgressBarWidth('a very long prefix line that eats space', 8, 24, 50), 8);
+    });
+
     it('returns n/a for frame progress when the inputs are insufficient', function() {
         assert.strictEqual(h265ize.Video.formatProgressFrames({}, null, null), 'n/a');
     });
