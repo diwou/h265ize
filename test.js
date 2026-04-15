@@ -198,12 +198,16 @@ describe('Helpers', function() {
         command.outputOptions('-map', 0);
         command.videoCodec('libx265');
         command.audioCodec('copy');
+        command.outputOptions('-crf 19');
+        command.outputOptions('-updatefirst 1');
         command.output('/tmp/output.mkv');
 
         assert.deepEqual(command._getArguments(), [
             '-ss', '12.345',
             '-i', '/tmp/input.mkv',
             '-map', 0,
+            '-crf', '19',
+            '-updatefirst', '1',
             '-c:v', 'libx265',
             '-c:a', 'copy',
             '/tmp/output.mkv'
