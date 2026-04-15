@@ -11,6 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
+- Kept the verbose live progress line on wide terminals while still falling back to the compact progress bar layout when space is tight. [0308e86]
 - Removed the inactive `gpu-info` runtime dependency and its unused hardware-detection probe from the encoder startup path. [edf6335]
 - Showed `100%` instead of `100.0%` on the final progress line so the last frame count and completion state read cleanly. [d4f1355]
 - Finalized the live progress line at completion so the last visible frame count is pulled to the exact total and `100%` before the summary starts. [e2e4adc]
