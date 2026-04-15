@@ -11,7 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
-- Added frame-rate source diagnostics to `--debug` progress output so it is visible whether `avg_frame_rate` or `r_frame_rate` was used. [pending]
+- Added frame-rate source diagnostics to `--debug` progress output so it is visible whether `avg_frame_rate` or `r_frame_rate` was used. [92034f5]
 - Added a frame-rate fallback from `r_frame_rate` and an ETA fallback from the remaining duration when `avg_frame_rate` is missing or unusable. [80f7ce5]
 - Switched bitrate grouping to comma separators so summary values read as `5,019 kb/s` instead of space-separated groups. [1492efc]
 
