@@ -11,7 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
-- Restored `timemark` in the live progress renderer so the wide-terminal detail line can again show the same fields as the debug status and legacy output. [pending]
+- Restored `timemark` in the live progress renderer so the wide-terminal detail line can again show the same fields as the debug status and legacy output. [19cd9e8]
 - Flattened the remaining progress diagnostic width fields so the debug output now shows each column value directly instead of a nested object. [5399328]
 - Flattened the `--debug` progress width diagnostics so the live logs show the individual column sources instead of a nested `[object Object]` value. [95ec089]
 - Used the same divider-style column source for the live progress output so wide terminals keep the familiar full-width progress line instead of falling back to the compact form. [263ce5a]
