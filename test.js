@@ -4,6 +4,7 @@ const fs = require('fs');
 const Path = require('path');
 const h265ize = require('./h265ize');
 const ASPresets = require('./lib/aspresets.json');
+const FfmpegCommandBuilder = require('./lib/ffmpegCommandBuilder.js');
 
 const helpers = h265ize._helpers;
 
@@ -189,6 +190,24 @@ describe('Helpers', function() {
                 'dry-run': 'yes'
             });
         }, /must be true or false/);
+    });
+
+    it('builds direct ffmpeg command arguments from the local builder', function() {
+        let command = new FfmpegCommandBuilder('/tmp/input.mkv');
+        command.inputOptions('-ss', '12.345');
+        command.outputOptions('-map', 0);
+        command.videoCodec('libx265');
+        command.audioCodec('copy');
+        command.output('/tmp/output.mkv');
+
+        assert.deepEqual(command._getArguments(), [
+            '-ss', '12.345',
+            '-i', '/tmp/input.mkv',
+            '-map', 0,
+            '-c:v', 'libx265',
+            '-c:a', 'copy',
+            '/tmp/output.mkv'
+        ]);
     });
 });
 
