@@ -11,7 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
-- Added an npm override so `serialize-javascript` resolves to the non-vulnerable `7.0.5` release and the test-only audit warnings disappear. [pending]
+- Added an npm override so `serialize-javascript` resolves to the non-vulnerable `7.0.5` release and the test-only audit warnings disappear. [1f191fb]
 - Removed stale TODO comments and the obsolete fallback-bitdepth comment block left behind from the old `fluent-ffmpeg` path. [85cef04]
 - Removed the obsolete `patch-package` postinstall hook and deleted the stale `fluent-ffmpeg` compatibility patch after the direct ffmpeg migration made them unnecessary. [b562082]
 - Restored `timemark` in the live progress renderer so the wide-terminal detail line can again show the same fields as the debug status and legacy output. [19cd9e8]
