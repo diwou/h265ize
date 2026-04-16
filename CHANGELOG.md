@@ -11,6 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
+- Replaced `mime` with a small local extension-based video file detector so folder scanning no longer depends on the old MIME helper package. [0125c23]
 - Replaced the old `keypress` package with Node's built-in keypress event handling for the TTY pause/debug controls. [ba1e3ed]
 - Replaced `promise-pauser` with a local pause controller so encode pause/resume handling no longer depends on the old helper package. [5e583bd]
 - Replaced the old `hasbin` and `filesize` dependencies with local helper routines so external command checks and file-size formatting no longer depend on stale packages. [7a6a1da]
