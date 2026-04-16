@@ -151,6 +151,17 @@ describe('Helpers', function() {
         assert.strictEqual(helpers.formatDurationHms(360000), '100:00:00');
     });
 
+    it('formats file sizes with a local helper', function() {
+        assert.strictEqual(helpers.formatFileSize(0), 'n/a');
+        assert.strictEqual(helpers.formatFileSize(1024), '1 KB');
+        assert.strictEqual(helpers.formatFileSize(2.05 * 1024 * 1024 * 1024), '2.05 GB');
+    });
+
+    it('detects commands through the local command helper', function() {
+        assert.strictEqual(helpers.commandExists(process.execPath), true);
+        assert.strictEqual(helpers.commandExists('/definitely/not/a/real/command'), false);
+    });
+
     it('recursively finds supported videos in nested directories', function() {
         let tempDir = makeTempDir('h265ize-parse-input-');
         let nestedDir = Path.join(tempDir, 'nested');
