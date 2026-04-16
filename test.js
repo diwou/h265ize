@@ -201,6 +201,38 @@ describe('Helpers', function() {
         assert.deepEqual(args._, ['input.mkv']);
     });
 
+    it('supports bundled short CLI aliases and attached values', function() {
+        let bundledArgs = helpers.getCLIArguments([
+            '-vp',
+            '-q26',
+            '-neng',
+            'input.mkv'
+        ], {});
+
+        assert.strictEqual(bundledArgs.verbose, true);
+        assert.strictEqual(bundledArgs.v, true);
+        assert.strictEqual(bundledArgs.preview, true);
+        assert.strictEqual(bundledArgs.p, true);
+        assert.strictEqual(bundledArgs.quality, 26);
+        assert.strictEqual(bundledArgs.q, 26);
+        assert.strictEqual(bundledArgs['native-language'], 'eng');
+        assert.strictEqual(bundledArgs.nativeLanguage, 'eng');
+        assert.strictEqual(bundledArgs.n, 'eng');
+        assert.deepEqual(bundledArgs._, ['input.mkv']);
+    });
+
+    it('preserves explicit zero values from settings defaults', function() {
+        let args = helpers.getCLIArguments([], {
+            quality: 0,
+            'normalize-level': 0
+        });
+
+        assert.strictEqual(args.quality, 0);
+        assert.strictEqual(args.q, 0);
+        assert.strictEqual(args['normalize-level'], 0);
+        assert.strictEqual(args.normalizeLevel, 0);
+    });
+
     it('formats ANSI colors through the local helper', function() {
         assert.strictEqual(stripAnsi(colors.yellow('hello')), 'hello');
         assert.strictEqual(colors.bgMagenta.white('[ffmpeg]'), '\u001b[45m\u001b[37m[ffmpeg]\u001b[39m\u001b[49m');
