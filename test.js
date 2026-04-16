@@ -7,6 +7,7 @@ const stripAnsi = require('strip-ansi');
 const h265ize = require('./h265ize');
 const ASPresets = require('./lib/aspresets.json');
 const FfmpegCommandBuilder = require('./lib/ffmpegCommandBuilder.js');
+const colors = require('./lib/ansiColors.js');
 const pauseController = require('./lib/pauseController.js');
 
 const helpers = h265ize._helpers;
@@ -161,6 +162,11 @@ describe('Helpers', function() {
     it('detects commands through the local command helper', function() {
         assert.strictEqual(helpers.commandExists(process.execPath), true);
         assert.strictEqual(helpers.commandExists('/definitely/not/a/real/command'), false);
+    });
+
+    it('formats ANSI colors through the local helper', function() {
+        assert.strictEqual(stripAnsi(colors.yellow('hello')), 'hello');
+        assert.strictEqual(colors.bgMagenta.white('[ffmpeg]'), '\u001b[45m\u001b[37m[ffmpeg]\u001b[39m\u001b[49m');
     });
 
     it('resolves pause controller waiters after unpausing', async function() {

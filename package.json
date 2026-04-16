@@ -40,7 +40,6 @@
   },
   "dependencies": {
     "chokidar": "^5.0.0",
-    "colors": "^1.1.2",
     "memorystream": "^0.3.1",
     "strip-ansi": "^3.0.1",
     "yargs": "^18.0.0"
