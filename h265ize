@@ -10,7 +10,6 @@ const childProcess = require('child_process');
 const _ = require("./lib/lodashLite.js");
 const colors = require('colors');
 const fs = require('fs');
-const keypress = require('keypress');
 const Promise = require("bluebird");
 const yargs = require('yargs');
 const chokidar = require('chokidar');
@@ -153,7 +152,7 @@ function runCli() {
         // Make sure this is a terminal where we can listen for input events
         // If it is, then listen for specific keypress events
         if (process.stdin.isTTY) {
-            keypress(process.stdin);
+            readline.emitKeypressEvents(process.stdin);
             process.stdin.setRawMode(true);
             process.stdin.resume();
             process.stdin.on('keypress', function(ch, key) {
