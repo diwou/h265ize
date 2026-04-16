@@ -11,6 +11,7 @@ const colors = require('./lib/ansiColors.js');
 const pauseController = require('./lib/pauseController.js');
 
 const helpers = h265ize._helpers;
+const nativeWatcher = require('./lib/nativeWatcher.js');
 
 const nullFunc = function() {
     return undefined;
@@ -219,6 +220,83 @@ describe('Helpers', function() {
         }).finally(function() {
             removeTempDir(tempDir);
         });
+    });
+
+    it('collects watch directories recursively', function() {
+        let tempDir = makeTempDir('h265ize-native-watch-dirs-');
+        let nestedDir = Path.join(tempDir, 'nested', 'deeper');
+
+        fs.mkdirSync(nestedDir, {
+            recursive: true
+        });
+
+        try {
+            let directories = nativeWatcher.collectDirectories(tempDir).sort();
+            assert.deepEqual(directories, [
+                tempDir,
+                Path.join(tempDir, 'nested'),
+                nestedDir
+            ].sort());
+        } finally {
+            removeTempDir(tempDir);
+        }
+    });
+
+    it('ignores hidden watch paths', function() {
+        assert.strictEqual(nativeWatcher.shouldIgnorePath('/tmp/.hidden/movie.mkv', /[\/\\]\./), true);
+        assert.strictEqual(nativeWatcher.shouldIgnorePath('/tmp/movie.mkv', /[\/\\]\./), false);
+    });
+
+    it('detects newly added files with the native watcher', async function() {
+        let tempDir = makeTempDir('h265ize-native-watch-');
+        let nestedDir = Path.join(tempDir, 'nested');
+        let watchedFiles = [];
+        let watcher;
+
+        fs.mkdirSync(nestedDir, {
+            recursive: true
+        });
+
+        try {
+            watcher = nativeWatcher.createNativeWatcher(tempDir, {
+                ignored: /[\/\\]\./,
+                stabilityThreshold: 50,
+                pollInterval: 10,
+                onAdd: function(path) {
+                    watchedFiles.push(path);
+                }
+            });
+
+            let videoPath = Path.join(nestedDir, 'movie.mkv');
+
+            await new Promise(function(resolve) {
+                setTimeout(resolve, 100);
+            });
+
+            fs.writeFileSync(videoPath, 'hello world');
+
+            await new Promise(function(resolve, reject) {
+                let deadline = Date.now() + 3000;
+
+                function poll() {
+                    if (watchedFiles.indexOf(videoPath) !== -1)
+                        return resolve();
+
+                    if (Date.now() > deadline)
+                        return reject(new Error('Timed out waiting for native watcher to detect ' + videoPath));
+
+                    setTimeout(poll, 25);
+                }
+
+                poll();
+            });
+
+            assert.deepEqual(watchedFiles, [videoPath]);
+        } finally {
+            if (watcher)
+                watcher.close();
+            removeTempDir(tempDir);
+        }
     });
 
     it('validates settings objects against the supported config schema', function() {
