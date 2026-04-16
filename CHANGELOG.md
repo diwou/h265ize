@@ -11,6 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
+- Removed the obsolete `patch-package` postinstall hook and deleted the stale `fluent-ffmpeg` compatibility patch after the direct ffmpeg migration made them unnecessary. [pending]
 - Restored `timemark` in the live progress renderer so the wide-terminal detail line can again show the same fields as the debug status and legacy output. [19cd9e8]
 - Flattened the remaining progress diagnostic width fields so the debug output now shows each column value directly instead of a nested object. [5399328]
 - Flattened the `--debug` progress width diagnostics so the live logs show the individual column sources instead of a nested `[object Object]` value. [95ec089]
