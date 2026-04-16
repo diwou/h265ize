@@ -160,6 +160,13 @@ describe('Helpers', function() {
         assert.strictEqual(helpers.formatFileSize(2.05 * 1024 * 1024 * 1024), '2.05 GB');
     });
 
+    it('formats channel counts with the corrected helper name', function() {
+        assert.strictEqual(helpers.getFormattedChannels(1), 'Mono');
+        assert.strictEqual(helpers.getFormattedChannels(2), 'Stereo');
+        assert.strictEqual(helpers.getFormattedChannels(6), '5.1 Channel');
+        assert.strictEqual(helpers.getFormatedChannels(2), 'Stereo');
+    });
+
     it('detects commands through the local command helper', function() {
         assert.strictEqual(helpers.commandExists(process.execPath), true);
         assert.strictEqual(helpers.commandExists('/definitely/not/a/real/command'), false);
