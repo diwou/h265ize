@@ -6,7 +6,7 @@
   "description": "Maintained Node.js CLI for batch video transcoding to H.265/HEVC with modern ffmpeg compatibility.",
   "main": "h265ize",
   "scripts": {
-    "test": "mocha --reporter spec test.js"
+    "test": "node --test test.js"
   },
   "bin": {
     "h265ize": "h265ize"
@@ -50,13 +50,6 @@
     "promise-pauser": "^1.0.0",
     "strip-ansi": "^3.0.1",
     "yargs": "^18.0.0"
-  },
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^11.3.0"
-  },
-  "overrides": {
-    "serialize-javascript": "7.0.5"
   },
   "eslintConfig": {
     "parserOptions": {
