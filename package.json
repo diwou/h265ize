@@ -55,6 +55,9 @@
     "chai": "^3.5.0",
     "mocha": "^11.3.0"
   },
+  "overrides": {
+    "serialize-javascript": "7.0.5"
+  },
   "eslintConfig": {
     "parserOptions": {
       "ecmaVersion": 6,
