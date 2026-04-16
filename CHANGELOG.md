@@ -11,6 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
+- Guarded the native Promise stop path so video cleanup no longer tries to call Bluebird's `cancel()` on a resolved encode flow. [3f19344]
 - Replaced `colors` with a local ANSI helper so the logging and progress formatting no longer depend on the old color wrapper package. [0b969a5]
 - Replaced Bluebird with native Promises and a small local pause controller so the stage loop and screenshot sequencing no longer depend on the old promise helper stack. [4531fd0]
 - Replaced `mime` with a small local extension-based video file detector so folder scanning no longer depends on the old MIME helper package. [0125c23]
