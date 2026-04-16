@@ -11,6 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
+- Restored the legacy camelCase CLI option aliases in the local parser so the encode path again receives values like `outputFormat`, `previewLength`, and `dryRun` as expected. [593fbe3]
 - Replaced `yargs` with a local CLI parser so the command-line argument handling no longer depends on the old argument-parsing package. [ecb12b3]
 - Replaced `chokidar` with a local recursive `fs.watch` manager so the watch mode no longer depends on the old filesystem watcher package. [5af0663]
 - Replaced `memorystream` with a built-in `PassThrough` stream so the preview output no longer depends on the old memory-stream helper package. [02087f9]
