@@ -10,7 +10,6 @@ const childProcess = require('child_process');
 const _ = require("./lib/lodashLite.js");
 const colors = require('./lib/ansiColors.js');
 const fs = require('fs');
-const yargs = require('yargs');
 const nativeWatcher = require('./lib/nativeWatcher.js');
 
 const helpers = require(Path.join(__dirname, 'lib/helpers.js'));

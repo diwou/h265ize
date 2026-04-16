@@ -38,9 +38,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
-    "yargs": "^18.0.0"
-  },
   "eslintConfig": {
     "parserOptions": {
       "ecmaVersion": 6,

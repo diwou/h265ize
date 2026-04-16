@@ -165,6 +165,38 @@ describe('Helpers', function() {
         assert.strictEqual(helpers.commandExists('/definitely/not/a/real/command'), false);
     });
 
+    it('parses CLI arguments with aliases and defaults', function() {
+        let args = helpers.getCLIArguments([
+            '--show-command',
+            '--destination', '/tmp/out',
+            '--quality', '26',
+            'movie.mkv'
+        ], {});
+
+        assert.strictEqual(args['dry-run'], true);
+        assert.strictEqual(args['show-command'], true);
+        assert.strictEqual(args.destination, '/tmp/out');
+        assert.strictEqual(args.quality, 26);
+        assert.deepEqual(args._, ['movie.mkv']);
+        assert.strictEqual(typeof args.showHelp, 'function');
+    });
+
+    it('supports short CLI aliases for common options', function() {
+        let args = helpers.getCLIArguments([
+            '-v',
+            '-q', '22',
+            '-n', 'eng',
+            'input.mkv'
+        ], {});
+
+        assert.strictEqual(args.verbose, true);
+        assert.strictEqual(args.v, true);
+        assert.strictEqual(args.quality, 22);
+        assert.strictEqual(args['native-language'], 'eng');
+        assert.strictEqual(args.n, 'eng');
+        assert.deepEqual(args._, ['input.mkv']);
+    });
+
     it('formats ANSI colors through the local helper', function() {
         assert.strictEqual(stripAnsi(colors.yellow('hello')), 'hello');
         assert.strictEqual(colors.bgMagenta.white('[ffmpeg]'), '\u001b[45m\u001b[37m[ffmpeg]\u001b[39m\u001b[49m');
