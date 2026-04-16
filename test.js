@@ -200,6 +200,21 @@ describe('Helpers', function() {
         });
     });
 
+    it('treats m2ts as a supported video extension', function() {
+        let tempDir = makeTempDir('h265ize-parse-m2ts-');
+        let supportedFile = Path.join(tempDir, 'sample.m2ts');
+        let ignoredFile = Path.join(tempDir, 'sample.txt');
+
+        fs.writeFileSync(supportedFile, '');
+        fs.writeFileSync(ignoredFile, '');
+
+        return helpers.parseInput(tempDir, nullLogger).then(function(paths) {
+            assert.deepEqual(paths, [supportedFile]);
+        }).finally(function() {
+            removeTempDir(tempDir);
+        });
+    });
+
     it('validates settings objects against the supported config schema', function() {
         assert.doesNotThrow(function() {
             helpers.validateSettingsObject({
