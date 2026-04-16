@@ -11,6 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
+- Simplified the extracted `node:test` helper module so it exports plain helper functions instead of mutating the native `assert` object. [pending]
 - Moved the small `node:test` assertion compatibility helpers into a local test helper module so `test.js` can focus on the actual test cases again. [348154e]
 - Unified the live progress line segment construction so the wide renderer and the layout diagnostics share one common base instead of maintaining mirrored segment lists. [8612273]
 - Replaced the Mocha/Chai test runner stack with Node's built-in `node:test` so the project can keep its test tooling dependency-free. [0c91b9b]
