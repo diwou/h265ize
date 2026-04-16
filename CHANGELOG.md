@@ -11,7 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
-- Replaced the Mocha/Chai test runner stack with Node's built-in `node:test` so the project can keep its test tooling dependency-free. [pending]
+- Replaced the Mocha/Chai test runner stack with Node's built-in `node:test` so the project can keep its test tooling dependency-free. [0c91b9b]
 - Added an npm override so `serialize-javascript` resolves to the non-vulnerable `7.0.5` release and the test-only audit warnings disappear. [1f191fb]
 - Removed stale TODO comments and the obsolete fallback-bitdepth comment block left behind from the old `fluent-ffmpeg` path. [85cef04]
 - Removed the obsolete `patch-package` postinstall hook and deleted the stale `fluent-ffmpeg` compatibility patch after the direct ffmpeg migration made them unnecessary. [b562082]
