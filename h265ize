@@ -10,7 +10,6 @@ const childProcess = require('child_process');
 const _ = require("./lib/lodashLite.js");
 const colors = require('colors');
 const fs = require('fs');
-const Promise = require("bluebird");
 const yargs = require('yargs');
 const chokidar = require('chokidar');
 
@@ -21,13 +20,6 @@ const h265izeLogger = require('./lib/logger.js');
 /* INIT */
 
 module.name = packageSettings.name;
-
-Promise.config({
-    warnings: true,
-    longStackTraces: true,
-    cancellation: true,
-    monitoring: false
-});
 
 process.H265IZE_STOP_REQUEST_COUNT = 0;
 
