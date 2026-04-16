@@ -175,8 +175,11 @@ describe('Helpers', function() {
 
         assert.strictEqual(args['dry-run'], true);
         assert.strictEqual(args['show-command'], true);
+        assert.strictEqual(args.dryRun, true);
+        assert.strictEqual(args.showCommand, true);
         assert.strictEqual(args.destination, '/tmp/out');
         assert.strictEqual(args.quality, 26);
+        assert.strictEqual(args.outputFormat, 'mkv');
         assert.deepEqual(args._, ['movie.mkv']);
         assert.strictEqual(typeof args.showHelp, 'function');
     });
@@ -193,6 +196,7 @@ describe('Helpers', function() {
         assert.strictEqual(args.v, true);
         assert.strictEqual(args.quality, 22);
         assert.strictEqual(args['native-language'], 'eng');
+        assert.strictEqual(args.nativeLanguage, 'eng');
         assert.strictEqual(args.n, 'eng');
         assert.deepEqual(args._, ['input.mkv']);
     });
