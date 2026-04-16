@@ -11,6 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
+- Replaced `chokidar` with a local recursive `fs.watch` manager so the watch mode no longer depends on the old filesystem watcher package. [5af0663]
 - Replaced `memorystream` with a built-in `PassThrough` stream so the preview output no longer depends on the old memory-stream helper package. [02087f9]
 - Replaced `strip-ansi` with a local ANSI stripping helper so the logger, progress renderer, and tests no longer depend on the old ANSI cleanup package. [4fa2829]
 - Fixed the native stage loop start index so encoding now begins with the first real stage instead of trying to read `name` from an undefined stage entry. [67f4e02]
