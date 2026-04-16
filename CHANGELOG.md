@@ -11,7 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
-- Moved the small `node:test` assertion compatibility helpers into a local test helper module so `test.js` can focus on the actual test cases again. [pending]
+- Moved the small `node:test` assertion compatibility helpers into a local test helper module so `test.js` can focus on the actual test cases again. [348154e]
 - Unified the live progress line segment construction so the wide renderer and the layout diagnostics share one common base instead of maintaining mirrored segment lists. [8612273]
 - Replaced the Mocha/Chai test runner stack with Node's built-in `node:test` so the project can keep its test tooling dependency-free. [0c91b9b]
 - Added an npm override so `serialize-javascript` resolves to the non-vulnerable `7.0.5` release and the test-only audit warnings disappear. [1f191fb]
