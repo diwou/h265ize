@@ -12,7 +12,6 @@ const colors = require('colors');
 const fs = require('fs');
 const keypress = require('keypress');
 const Promise = require("bluebird");
-const Pauser = require('promise-pauser');
 const yargs = require('yargs');
 const chokidar = require('chokidar');
 

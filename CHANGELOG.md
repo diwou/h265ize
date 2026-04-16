@@ -11,6 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
+- Replaced `promise-pauser` with a local pause controller so encode pause/resume handling no longer depends on the old helper package. [7a6a1da]
 - Replaced the old `hasbin` and `filesize` dependencies with local helper routines so external command checks and file-size formatting no longer depend on stale packages. [7a6a1da]
 - Simplified the extracted `node:test` helper module so it exports plain helper functions instead of mutating the native `assert` object. [0492992]
 - Moved the small `node:test` assertion compatibility helpers into a local test helper module so `test.js` can focus on the actual test cases again. [348154e]

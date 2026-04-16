@@ -7,6 +7,7 @@ const stripAnsi = require('strip-ansi');
 const h265ize = require('./h265ize');
 const ASPresets = require('./lib/aspresets.json');
 const FfmpegCommandBuilder = require('./lib/ffmpegCommandBuilder.js');
+const pauseController = require('./lib/pauseController.js');
 
 const helpers = h265ize._helpers;
 
@@ -160,6 +161,25 @@ describe('Helpers', function() {
     it('detects commands through the local command helper', function() {
         assert.strictEqual(helpers.commandExists(process.execPath), true);
         assert.strictEqual(helpers.commandExists('/definitely/not/a/real/command'), false);
+    });
+
+    it('resolves pause controller waiters after unpausing', async function() {
+        let controller = pauseController.createPauseController();
+        pauseController.pause(controller);
+
+        let settled = false;
+        let waiter = pauseController.waitFor(controller).then(function() {
+            settled = true;
+        });
+
+        await Promise.resolve();
+        assert.strictEqual(settled, false);
+
+        pauseController.unpause(controller);
+        await waiter;
+
+        assert.strictEqual(settled, true);
+        assert.strictEqual(controller.paused, false);
     });
 
     it('recursively finds supported videos in nested directories', function() {
