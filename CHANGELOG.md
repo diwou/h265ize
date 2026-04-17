@@ -8,6 +8,8 @@ Release policy for this fork:
 - Only validated, working public releases receive semantic version numbers.
 - Interim maintenance milestones are tracked by commit ID until they are proven fit for release.
 
+## [Unreleased]
+
 ## [0.7.0] - 2026-04-17
 
 ### Fixed
