@@ -10,10 +10,11 @@ h265ize is a fire and forget weapon. A nodejs utility utilizing ffmpeg to encode
 
 ## Current Release
 
-The current stable fork release is `0.6.4`.
+The current stable fork release is `0.7.0`.
 
 Highlights:
 
+- most historic wrapper dependencies have been replaced with local helpers, making the fork noticeably more self-contained and future-proof
 - fixed deprecation warnings and trimmed obsolete dependencies
 - added `--probe`, `--explain`, `--dry-run`, `--ignore-err`, and `--crop-preview`
 - improved crop handling, progress reporting, and metadata fallbacks
