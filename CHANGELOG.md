@@ -11,6 +11,7 @@ Release policy for this fork:
 ## [Unreleased]
 
 ### Fixed
+- Cleaned up a couple of user-facing status strings by correcting the version retrieval message and the blu-ray compliance description text. [bca0ba8]
 - Corrected the channel formatter helper name while keeping the old alias available so the audio metadata helpers read cleaner without breaking existing call sites. [b7e1572]
 - Restored bundled short-option parsing and preserved explicit zero defaults in the local CLI parser so `-vp`, `-q26`, `-neng`, and `quality: 0` / `normalize-level: 0` work again as expected. [63391aa]
 - Restored the legacy camelCase CLI option aliases in the local parser so the encode path again receives values like `outputFormat`, `previewLength`, and `dryRun` as expected. [593fbe3]
