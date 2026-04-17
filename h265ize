@@ -95,7 +95,7 @@ function printVersion() {
             console.log(packageSettings.name, getDevelopmentVersion());
             process.exit(0);
         } catch (e) {
-            console.log('Unabled to retrieve version:', e);
+            console.log('Unable to retrieve version:', e);
             process.exit(1);
         }
     }
